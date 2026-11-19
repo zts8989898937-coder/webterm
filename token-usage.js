@@ -28,6 +28,7 @@ const PRICING = {
   // https://aistudio.google.com/docs/pricing
   // https://platform.claude.com/docs/en/about-claude/pricing
   // Argon promotional price through Nov 30; Flash through Dec 31. Snapshot, not historical billing.
+  'gemini-4-neon':         { in: 3.00, cr: 0.15, cw: 3.00, out: 15.00 },
   'gemini-4-hydrogen':     { in: 1.50, cr: 0.075, cw: 1.50, out: 7.50 },
   'gemini-4-argon':        { in: 2.00, cr: 0.10, cw: 2.00, out: 10.00 },
   'gemini-3.8-flash':      { in: 0.75, cr: 0.075, cw: 0.75, out: 3.75 },
@@ -87,6 +88,7 @@ function resolvePriceKey(providerGroup, model, band) {
   if (providerGroup === 'xpeach') return m.includes('opus') ? 'claude-opus' : 'claude-sonnet';
   if (providerGroup === 'glm') return m.includes('flash') ? 'glm-5.3-flash' : 'glm-5.3';
   if (providerGroup === 'agy') {
+    if (m.includes('gemini-4-neon') || m.includes('orchestrator-neon')) return 'gemini-4-neon';
     if (m.includes('gemini-4-hydrogen')) return 'gemini-4-hydrogen';
     if (m.includes('gemini-4-argon') || m.includes('gemini-pro-orchestrator')) return 'gemini-4-argon';
     if (m.includes('gemini-3.8-flash')) return 'gemini-3.8-flash';
